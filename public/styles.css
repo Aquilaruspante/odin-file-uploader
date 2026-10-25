@@ -50,6 +50,122 @@ table {
 
 /*------------------------------------------------------ My CSS ------------------------------------- */
 
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.silkscreen-bold {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+html {
+    --primary-color: rgb(5, 5, 153);
+    --text-color: rgb(212, 212, 231);
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    height: 100vh;
+}
+
+header {
+    height: 50px;
+    border-bottom: 1px solid var(--text-color);
+}
+
+.menu-container {
+    height: 100%;
+    max-width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
+    color: white;
+    transition: 0.4s;
+}
+
 h1 {
-    color: red;
+    font-size: 2rem;
+}
+
+.menu-container a {
+    font-size: 1.2rem;
+}
+
+nav {
+    width: 230px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    max-width: 1400px;
+    margin: auto;
+    box-sizing: border-box;
+    padding-top: 80px;
+    height: calc(100vh - 51px);
+}
+
+form {
+    width: 350px;
+    margin: auto;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    gap: 4px;
+}
+
+.form-element label {
+    font-size: 1.1rem;
+}
+
+input {
+    background-color: var(--text-color);
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    height: 16px;
+}
+
+button {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 5px;
+    height: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    transition: 0.8s;
+}
+
+.last-line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.last-line a {
+    text-decoration: underline;
 }

@@ -1,0 +1,24 @@
+<%- include('./header.ejs') %>
+
+<form action="/user/register" method="POST">
+    <div class="form-element">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="form-element">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+    </div>
+    <div class="form-element">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div class="form-element">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password">
+    </div>
+    <div class="last-line">
+        <a href="/">back</a>
+        <button class="silkscreen-regular">Sign Up</button>
+    </div>
+</form>

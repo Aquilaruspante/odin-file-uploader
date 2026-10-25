@@ -3,6 +3,8 @@ const path = require('node:path');
 const session = require('express-session');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { prisma } = require('./db/prisma.js');
+const passport = require('passport');
+
 
 const userRouter = require('./routes/userRoutes.js');
 
@@ -13,6 +15,7 @@ const app = express();
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ static: true }));
 
 /* ------------------------------------------------- Session management -------------------------*/
 
@@ -34,10 +37,24 @@ app.use(session({
     )
 }));
 
+require('./config/passport.js')
+app.use(passport.session());
+
+app.use((req, res, next) => {
+    console.log('session', req.session);
+    next();
+});
+
 /*----------------------------------------------- Routes -------------------------------*/
 
 app.get('/', (req, res) => {
-    res.render('home');
+    const messages = req.session.messages;
+    delete req.session.messages;
+
+    const user = req.user;
+
+    console.log('messages', messages);
+    res.render('home', { messages, user });
 });
 
 app.use('/user', userRouter);

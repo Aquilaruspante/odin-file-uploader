@@ -14,10 +14,18 @@
         <div class="menu-container">
             <h1 class="silkscreen-bold">File Uploader</h1>
             <nav class="silkscreen-bold">
-                <a href="/user/register">Sign Up</a>
-                <a href="/user/login">Login</a>
+                <% if (user) { %>
+                    <p class="username-display"><%= user.username %></p>
+                    <a href="/user/logout">Logout</a>
+                <% } else { %>
+                    <a href="/user/register">Sign Up</a>
+                    <a href="/user/login">Login</a>
+                <% } %>
             </nav>
         </div>
         
     </header>
     <main>
+        <% if (messages) { %>
+            <p class="flash-message <%= messages.type %>""><%= messages.message %></p>
+        <% } %>

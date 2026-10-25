@@ -17,7 +17,6 @@ model User {
   username     String          @unique
   email        String          @unique
   hashedPW     String
-  salt         String
   folders      Folder[]
 }
 

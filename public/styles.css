@@ -113,7 +113,17 @@ nav {
     justify-content: space-between;
 }
 
+.username-display {
+    font-size: 1.2rem;
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 main {
+    position: relative;
     max-width: 1400px;
     margin: auto;
     box-sizing: border-box;
@@ -168,4 +178,15 @@ button:hover {
 
 .last-line a {
     text-decoration: underline;
+}
+
+.flash-message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 30px;
+}
+
+.failure {
+    color: red;
 }

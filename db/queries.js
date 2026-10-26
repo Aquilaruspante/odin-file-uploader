@@ -9,15 +9,17 @@ exports.userCreate = async function userCreate(username, email, hash) {
             email: email,
             hashedPW: hash,
             folders: {
-                create: {
-                    name: 'Photos'
-                },
-                create: {
-                    name: 'Videos'
-                },
-                create: {
-                    name: 'Documents'
-                }
+                create: [
+                    {
+                        name: 'Photos'
+                    },
+                    {
+                        name: 'Videos'
+                    },
+                    {
+                        name: 'Documents'
+                    }
+                ]
             }
         }
     });

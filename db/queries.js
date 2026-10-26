@@ -3,7 +3,7 @@ const { prisma } = require('./prisma');
 /*----------------------- User --------------------------------*/
 
 exports.userCreate = async function userCreate(username, email, hash) {
-    await prisma.user.create({
+    const user = await prisma.user.create({
         data: {
             username: username,
             email: email,
@@ -24,7 +24,7 @@ exports.userCreate = async function userCreate(username, email, hash) {
         }
     });
 
-    console.log('user created!');
+    return user;
 };
 
 exports.userGetByUsername = async function userGetByUsername(username) {

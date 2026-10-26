@@ -32,11 +32,15 @@ exports.userCreatePost = function userCreatePost(req, res, next) {
                     return res.redirect('/user/register');
                 });
             }
-            await db.userCreate(username, email, hash);
-            req.session.messages = { type: 'success', message: `Welcome ${username}`};
-            req.session.save(err => {
-                if (err) console.log(err);
-                res.redirect('/');
+            const user = await db.userCreate(username, email, hash);
+            console.log('user', user);
+            req.login(user, err => {
+                if (err) return next(err);
+                req.session.messages = { type: 'success', message: `Welcome ${username}`};
+                req.session.save(err => {
+                    if (err) console.log(err);
+                    res.redirect('/');
+                });
             });
         });
     });

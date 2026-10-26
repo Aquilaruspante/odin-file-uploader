@@ -37,7 +37,8 @@ exports.userGetByUsername = async function userGetByUsername(username) {
 
 exports.userGetById = async function userGetById(id) {
     const user = await prisma.user.findFirst({
-        where: { id: id }
+        where: { id: id },
+        include: { folders: true }
     });
 
     return user;

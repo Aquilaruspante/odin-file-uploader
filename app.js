@@ -45,16 +45,22 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
+
 /*----------------------------------------------- Routes -------------------------------*/
 
 app.get('/', (req, res) => {
     const messages = req.session.messages;
     delete req.session.messages;
 
-    res.locals.user = req.user;
-
-    console.log('messages', messages);
-    res.render('home', { messages });
+    if (req.isAuthenticated()) {
+        res.render('home', { messages });
+    } else {
+        res.redirect('/user/login');
+    };
 });
 
 app.use('/user', userRouter);

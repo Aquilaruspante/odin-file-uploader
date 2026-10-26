@@ -5,9 +5,9 @@ const { use } = require('react');
 
 const router = new Router();
 
-router.get('/register', userController.userCreateGet);
+router.get('/register', isNotAuth, userController.userCreateGet);
 
-router.post('/register', passwordMatch,  userController.userCreatePost);
+router.post('/register', isNotAuth, passwordMatch,  userController.userCreatePost);
 
 router.get('/login',isNotAuth, userController.loginGet);
 

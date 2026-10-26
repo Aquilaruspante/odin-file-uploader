@@ -14,7 +14,7 @@
         <div class="menu-container">
             <h1 class="silkscreen-bold">File Uploader</h1>
             <nav class="silkscreen-bold">
-                <% if (user) { %>
+                <% if (locals.user) { %>
                     <p class="username-display"><%= user.username %></p>
                     <a href="/user/logout">Logout</a>
                 <% } else { %>

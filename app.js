@@ -51,10 +51,10 @@ app.get('/', (req, res) => {
     const messages = req.session.messages;
     delete req.session.messages;
 
-    const user = req.user;
+    res.locals.user = req.user;
 
     console.log('messages', messages);
-    res.render('home', { messages, user });
+    res.render('home', { messages });
 });
 
 app.use('/user', userRouter);

@@ -1,0 +1,12 @@
+<%- include('./header.ejs') %>
+
+<form action="/folders" method="POST" class="new-folder-form">
+    <div id="create-folder-input">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+    </div> 
+    <button id="create-folder-button">Create</button>
+</form>
+<p class="home-link"><a href="/" class="home-link">Home</a></p>
+
+<%- include('./footer.ejs') %>

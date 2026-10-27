@@ -256,3 +256,16 @@ button:hover {
     background-color: rgb(33, 33, 202);
     transition: 0.6s;
 }
+
+.new-folder-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 16px;
+}
+
+.create-folder-input {
+    display: flex;
+    justify-content: space-between;
+}

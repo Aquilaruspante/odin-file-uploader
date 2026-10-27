@@ -4,10 +4,7 @@ const passport = require('passport');
 const db = require('../db/queries');
 
 exports.userCreateGet = function userCreateGet(req, res) {
-    const messages = req.session.messages;
-    delete req.session.messages;
-
-    res.render('register', { messages })
+    res.render('register')
 }
 
 exports.userCreatePost = function userCreatePost(req, res, next) {
@@ -20,7 +17,7 @@ exports.userCreatePost = function userCreatePost(req, res, next) {
             req.session.messages = { type: 'failure', message: 'Somethinge went wrong!' };
             req.session.save(err => {
                 if (err) console.log(err);
-                return res.redirect('/user/register');
+                return res.redirect('/users/register');
             });
         }
         bcrypt.hash(password, salt, async (err, hash) => {
@@ -29,7 +26,7 @@ exports.userCreatePost = function userCreatePost(req, res, next) {
                 req.session.messages = { type: 'failure', message: 'Somethinge went wrong!' };
                 req.session.save(err => {
                     if (err) console.log(err);
-                    return res.redirect('/user/register');
+                    return res.redirect('/users/register');
                 });
             }
             const user = await db.userCreate(username, email, hash);
@@ -47,10 +44,7 @@ exports.userCreatePost = function userCreatePost(req, res, next) {
 };
 
 exports.loginGet = function loginGet(req, res) {
-    const messages = req.session.messages;
-    delete req.session.messages;
-
-    res.render('login', { messages });
+    res.render('login');
 };
 
 exports.loginPost = function loginPost(req, res, next) {
@@ -60,13 +54,16 @@ exports.loginPost = function loginPost(req, res, next) {
             req.session.messages = { type: 'failure', message: 'Wrong credentials!' };
             return req.session.save(err => {
                 if (err) return next(err);
-                res.redirect('/user/login');
+                res.redirect('/users/login');
             });
         };
         req.login(user, err => {
             if (err) return next(err);
             req.session.messages = { type: 'success', message: `Welcome ${user.username}` };
-            res.redirect('/');
+            req.session.save(err => {
+                if (err) return next(err);
+                res.redirect('/');
+            });  
         });
     })(req, res, next);
 };

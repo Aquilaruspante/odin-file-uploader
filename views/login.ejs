@@ -2,12 +2,15 @@
 
 <form action="/user/login" method="POST">
     <div class="form-element">
-        <label for="username">Username</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username">
     </div>
     <div class="form-element">
-        <label for="password">Password</label>
+        <label for="password">Password:</label>
         <input type="password" id="password" name="password">
     </div>
-    <button class="silkscreen-regular">Login</button>
+    <div class="last-line login">
+        <button class="silkscreen-regular">Login</button>
+    </div>
+    <p class="sign-in-prompt">You dont have an account? <a href="/user/register">Sign up</a></p>
 </form>

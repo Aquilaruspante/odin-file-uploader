@@ -9,11 +9,10 @@ passport.use(new Strategy(async (username, password, done) => {
 
         if (!user) return done(null, false);
 
-        bcrypt.compare(password, user.hashedPW, (err, result) => {
-            if (err) console.log(err);
-            if (!result) return done(null, false);
-            return done(null, user);
-        });
+        const match = await bcrypt.compare(password, user.hashedPW);
+        if (!match) return done(null, false);
+
+        return done(null, user);
     } catch (e) {
         done(e);
     };
@@ -21,7 +20,8 @@ passport.use(new Strategy(async (username, password, done) => {
 }));
 
 passport.serializeUser((user, done) => {
-    if (user) done(null, user.id)
+    console.log('user', user);
+    done(null, user.id)
 });
 
 passport.deserializeUser(async (user_id, done) => {

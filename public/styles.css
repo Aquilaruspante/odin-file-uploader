@@ -132,8 +132,13 @@ main {
 }
 
 form {
-    width: 350px;
+    width: 360px;
     margin: auto;
+    margin-top: 40px;
+    border: 2px solid var(--text-color);
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 8px;
 }
 
 .form-element {
@@ -160,7 +165,8 @@ button {
     color: var(--primary-color);
     border: none;
     border-radius: 5px;
-    height: 20px;
+    height: 24px;
+    width: 80px;
 }
 
 button:hover {
@@ -197,4 +203,17 @@ button:hover {
     gap: 120px;
     margin: auto;
     
+}
+
+.login {
+    justify-content: end;
+}
+
+.sign-in-prompt {
+    font-size: 0.85rem;
+    margin-top: 16px;
+}
+
+.sign-in-prompt a {
+    text-decoration: underline;
 }

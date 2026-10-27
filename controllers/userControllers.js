@@ -57,22 +57,18 @@ exports.loginPost = function loginPost(req, res, next) {
     passport.authenticate('local', (err, user, info) => {
         if (err) return next(err);
         if (!user) {
-            try {
-                req.session.messages = { type: 'failure', message: 'Wrong credentials!' };
-                req.session.save(err => {
-                    if (err) return next(err);
-                    return res.redirect('/user/login');
-                });
-            } catch (e) {
-                next(e);
-            };
+            req.session.messages = { type: 'failure', message: 'Wrong credentials!' };
+            return req.session.save(err => {
+                if (err) return next(err);
+                res.redirect('/user/login');
+            });
         };
         req.login(user, err => {
             if (err) return next(err);
             req.session.messages = { type: 'success', message: `Welcome ${user.username}` };
             res.redirect('/');
         });
-    })(req, res. next);
+    })(req, res, next);
 };
 
 exports.logout = function logout(req, res) {

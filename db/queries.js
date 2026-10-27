@@ -43,3 +43,14 @@ exports.userGetById = async function userGetById(id) {
 
     return user;
 };
+
+
+/*--------------------------------------------- Folders ----------------------*/
+
+exports.folderGetById = async function folderGetById(id) {
+    const folder = await prisma.folder.findFirst({
+        where: { id: id },
+        include: { files: true }
+    });
+     return folder;
+};

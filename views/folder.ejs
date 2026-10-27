@@ -1,0 +1,11 @@
+<%- include('./header.ejs') %>
+
+<% if (!folder.files.length) { %>
+    <p id="no-files-message">No files in this folder yet...</p>
+<% } else { %>
+    <% for (let file of folder.files) { %>
+        <p><%= file.name %></p>
+    <% } %>
+<% } %>
+
+<%- include('./footer.ejs') %>

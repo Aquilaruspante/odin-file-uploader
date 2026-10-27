@@ -2,7 +2,7 @@
 
 <div id="folder-container">
     <% for (let folder of locals.user.folders) { %>
-        <a href="/<%= locals.user.username %>/<%= folder.name %>">
+        <a href="/folders/<%= folder.id %>">
             <div class="folder-component">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     width="80" 

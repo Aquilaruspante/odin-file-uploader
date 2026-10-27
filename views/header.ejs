@@ -18,16 +18,16 @@
             <nav class="silkscreen-bold">
                 <% if (locals.user) { %>
                     <p class="username-display"><%= user.username %></p>
-                    <a href="/user/logout">Logout</a>
+                    <a href="/users/logout">Logout</a>
                 <% } else { %>
-                    <a href="/user/register">Sign Up</a>
-                    <a href="/user/login">Login</a>
+                    <a href="/users/register">Sign Up</a>
+                    <a href="/users/login">Login</a>
                 <% } %>
             </nav>
         </div>
         
     </header>
     <main>
-        <% if (messages) { %>
+        <% if (locals.messages) { %>
             <p class="flash-message <%= messages.type %>""><%= messages.message %></p>
         <% } %>

@@ -7,6 +7,7 @@ const passport = require('passport');
 
 
 const userRouter = require('./routes/userRoutes.js');
+const foldersRoute = require('./routes/foldersRoute.js');
 
 const app = express();
 
@@ -47,24 +48,33 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
     res.locals.user = req.user;
-    console.log(res.locals.user);
+    if (req.session.messages) {
+        res.locals.messages = req.session.messages;
+        delete req.session.messages;
+    };
     next();
 });
 
 /*----------------------------------------------- Routes -------------------------------*/
 
 app.get('/', (req, res) => {
-    const messages = req.session.messages;
-    delete req.session.messages;
-
     if (req.isAuthenticated()) {
-        res.render('home', { messages });
+        res.render('home');
     } else {
-        res.redirect('/user/login');
+        res.redirect('/users/login');
     };
 });
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
+
+app.use('/folders', foldersRoute);
+
+app.use((err, req, res, next) => {
+    console.log(err);
+
+    const { status, message } = err;
+    res.render('error', { status, message });
+});
 
 /*------------------------------------------------ Server launch ---------------------------*/
 

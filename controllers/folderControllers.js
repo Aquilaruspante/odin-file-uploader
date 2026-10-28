@@ -1,5 +1,6 @@
 const db = require('../db/queries');
 const ExpressError = require('../ExpressError');
+const { validationResult, matchedData } = require('express-validator');
 
 exports.folderGet = async function(req, res, next) {
     const { id } = req.params;
@@ -17,10 +18,21 @@ exports.folderCreateGet = function folderCreateGet(req, res) {
     res.render('new-folder');
 };
 
-exports.folderCreatePost = async function folderCreatePost(req, res) {
-    const { name } = req.body;
+exports.folderCreatePost = async function folderCreatePost(req, res, next) {
+    const results = validationResult(req);
 
-    const folder = await db.folderCreate(name, req.user.id);
+    if (results.isEmpty()) {
+        const { name } = matchedData(req);
 
-    res.redirect(`/folders/${folder.id}`);
+        const folder = await db.folderCreate(name, req.user.id);
+
+        res.redirect(`/folders/${folder.id}`);
+    } else {
+        const errors = results.array();
+        req.session.messages = { type: 'failure', message: errors[0].msg };
+        return req.session.save(err => {
+            if (err) next(err);
+            res.redirect('/folders/new');
+        });
+    };
 };

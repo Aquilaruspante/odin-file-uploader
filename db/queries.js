@@ -45,6 +45,14 @@ exports.userGetById = async function userGetById(id) {
     return user;
 };
 
+exports.userGetByEmail = async function userGetByEmail(email) {
+    const user = await prisma.user.findFirst({
+        where: { email: email }
+    });
+
+    return user;
+};
+
 
 /*--------------------------------------------- Folders ----------------------*/
 

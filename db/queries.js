@@ -1,4 +1,5 @@
 const { prisma } = require('./prisma');
+const path = require('node:path');
 const ExpressError = require('../ExpressError');
 
 /*----------------------- User --------------------------------*/
@@ -68,4 +69,16 @@ exports.folderCreate = async function folderCreate(name, userId) {
     const folder = await prisma.folder.create({ data: { name, userId } });
 
     return folder;
+};
+
+/*--------------------------------------------- Files -------------------------*/
+
+exports.fileCreate = async function fileCreate(folderId, name) {
+    const file = await prisma.file.create({
+        data: {
+            name: name,
+            url: path.join(__dirname, `uploads/${name}`),
+            folderId: parseInt(folderId)
+        }
+    });
 };

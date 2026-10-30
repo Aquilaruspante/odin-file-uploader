@@ -5,7 +5,7 @@
     <p id="no-files-message">No files in this folder yet...</p>
 <% } else { %>
     <% for (let file of folder.files) { %>
-        <p><%= file.name %></p>
+        <p><a href="/files/<%= file.id %>"><%= file.name %></a></p>
     <% } %>
 <% } %>
 

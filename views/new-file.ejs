@@ -1,0 +1,8 @@
+<%- include('./header.ejs') %>
+
+<form action="/folders/<%= id %>/files" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button>Upload</button>
+</form>
+
+<%- include('./footer.ejs') %>

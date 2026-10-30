@@ -98,7 +98,7 @@ exports.logout = function logout(req, res) {
     try {
         req.logout(err => {
         if (err) return next(err);
-            req.session.messages = { type: 'success', message: 'Succesfully logged out!' };
+            req.session.messages = { type: 'success', message: 'Come back soon!' };
             req.session.save(err => {
                 if (err) return next(err);
                 return res.redirect('/');

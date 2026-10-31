@@ -1,6 +1,6 @@
 <%- include('./header.ejs') %>
 
-<div id="folder-container">
+<div class="folder-container">
     <% for (let folder of locals.user.folders) { %>
         <a href="/folders/<%= folder.id %>">
             <div class="folder-component">

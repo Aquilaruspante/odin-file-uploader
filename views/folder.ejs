@@ -1,12 +1,21 @@
 <%- include('./header.ejs') %>
 
-<h2><%= folder.name %></h2>
+<h2 class="folder-name"><%= folder.name %></h2>
 <% if (!folder.files.length) { %>
     <p id="no-files-message">No files in this folder yet...</p>
 <% } else { %>
-    <% for (let file of folder.files) { %>
-        <p><a href="/files/<%= file.id %>"><%= file.name %></a></p>
-    <% } %>
+    <div class="folder-container">
+        <% for (let file of folder.files) { %>
+            <a href="/files/<%= file.id %>">
+                <div class="folder-component new-folder"></div>
+                <p class="file-name"><%= file.name %></p>
+            </a>
+        <% } %>
+        <a href="/folders/<%= folder.id %>/files/new" class="new-folder">
+            <div class="folder-component new-folder">+</div>
+        </a>
+    </div>
 <% } %>
+
 
 <%- include('./footer.ejs') %>

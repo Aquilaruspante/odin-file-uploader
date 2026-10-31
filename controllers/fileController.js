@@ -8,9 +8,9 @@ exports.fileCreateGet = function fileCreateGet(req, res) {
 
 exports.fileCreatePost = async function fileCreatePost(req, res, next) {
     const { id } = req.params;
-    const { filename } = req.file;
+    const { originalname, size } = req.file;
 
-    await db.fileCreate(id, filename);
+    await db.fileCreate(id, originalname, size);
 
     req.session.messages = { type: 'succes', message: 'File uploaded succesfully!' };
     return req.session.save(err => {

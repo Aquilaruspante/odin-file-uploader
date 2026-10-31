@@ -9,6 +9,8 @@ const passport = require('passport');
 const userRouter = require('./routes/userRoutes.js');
 const foldersRoute = require('./routes/foldersRoute.js');
 
+const { isAuth } = require('./middleware.js');
+
 const app = express();
 
 /*------------------------------------------------ Config ----------------------------------*/
@@ -67,7 +69,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRouter);
 
-app.use('/folders', foldersRoute);
+app.use('/folders', isAuth, foldersRoute);
 
 app.use((err, req, res, next) => {
     console.log(err);

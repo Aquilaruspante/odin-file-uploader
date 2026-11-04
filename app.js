@@ -75,7 +75,7 @@ app.use((err, req, res, next) => {
     console.log(err);
 
     const { status, message } = err;
-    res.render('error', { status, message });
+    res.status(status || 500).render('error', { status, message });
 });
 
 /*------------------------------------------------ Server launch ---------------------------*/

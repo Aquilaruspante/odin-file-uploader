@@ -1,13 +1,13 @@
 <%- include('./header.ejs') %>
 
 <div class="file-display">
-    <% if (file.mimetype === 'drawing' || file.mimetype === 'image') { %>
-        <img src="<%= file.url %>" alt="<%= file.name %>">
+    <% if (category === 'drawing' || category === 'image') { %>
+        <img src="<%= url %>" alt="<%= file.name %>">
     <% } %>
     <h2 class="file-title"><%= file.name %></h2>
     <p class="file-detail">Size: <%= file.size %></p>
     <p class="file-detail">Uploaded: <%= file.createdat %></p>
-    <a href="<%= file.url %>" download="">Download</a>
+    <a href="<%= url %>" download="">Download</a>
 </div>
 
 <%- include('./footer.ejs') %>

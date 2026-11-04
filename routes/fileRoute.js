@@ -11,4 +11,6 @@ router.get('/new', fileController.fileCreateGet);
 
 router.post('/', upload.single('file'),  fileController.fileCreatePost);
 
+router.get('/:id', fileController.fileGet);
+
 module.exports = router;

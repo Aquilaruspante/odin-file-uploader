@@ -35,6 +35,8 @@ model File {
   url          String          @unique
   name         String          
   size         Float
+  mimetype     String
+  createdat    DateTime        @default(now())
   folder       Folder          @relation(fields: [folderId], references: [id])
   folderId     Int
 

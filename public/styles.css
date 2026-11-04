@@ -278,3 +278,15 @@ button:hover {
 .file-name {
     max-width: 80px;
 }
+
+.file-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 400px;
+}
+
+.file-display img {
+    height: 250px;
+}

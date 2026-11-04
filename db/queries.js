@@ -73,13 +73,27 @@ exports.folderCreate = async function folderCreate(name, userId) {
 
 /*--------------------------------------------- Files -------------------------*/
 
-exports.fileCreate = async function fileCreate(folderId, name, size) {
+exports.fileCreate = async function fileCreate(folderId, name, size, category, destName) {
+    console.log('destname', destName);
     const file = await prisma.file.create({
         data: {
             name: name,
-            url: path.join(__dirname, `uploads/${name}`),
+            url: path.join(__dirname, '..', `uploads/${destName}`),
             size: parseFloat(size),
+            mimetype: category,
             folderId: parseInt(folderId)
         }
     });
+
+    return file;
+};
+
+exports.fileGetByid = async function fileGetById(id) {
+    const file = await prisma.file.findFirst({ 
+        where: { id: parseInt(id) }
+    });
+
+    console.log(file.url);
+
+    return file;
 };

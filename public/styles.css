@@ -284,6 +284,41 @@ button:hover {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    height: 300px;
+}
+
+.new-folder:hover {
+    background-color: rgb(33, 33, 202);
+    transition: 0.6s;
+}
+
+.new-folder-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 16px;
+}
+
+.create-folder-input {
+    display: flex;
+    justify-content: space-between;
+}
+
+.folder-name {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.file-name {
+    max-width: 80px;
+}
+
+.file-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     height: 400px;
 }
 

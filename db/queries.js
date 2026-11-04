@@ -1,6 +1,5 @@
 const { prisma } = require('./prisma');
 const path = require('node:path');
-const ExpressError = require('../ExpressError');
 
 /*----------------------- User --------------------------------*/
 
@@ -88,12 +87,11 @@ exports.fileCreate = async function fileCreate(folderId, name, size, category, d
     return file;
 };
 
-exports.fileGetByid = async function fileGetById(id) {
+exports.fileGetByid = async function fileGetById(id, folderId) {
+    console.log(id, folderId);
     const file = await prisma.file.findFirst({ 
-        where: { id: parseInt(id) }
+        where: { id: parseInt(id), folderId: parseInt(folderId) }
     });
-
-    console.log(file.url);
 
     return file;
 };

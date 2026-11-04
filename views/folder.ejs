@@ -9,7 +9,7 @@
 <% } else { %>
     <div class="folder-container">
         <% for (let file of folder.files) { %>
-            <a href="/folders/folder.id/files/<%= file.id %>">
+            <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
                 <div class="folder-component new-folder"></div>
                 <p class="file-name"><%= file.name %></p>
             </a>

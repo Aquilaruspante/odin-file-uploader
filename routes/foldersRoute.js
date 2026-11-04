@@ -5,7 +5,7 @@ const fileRouter = require('./fileRoute');
 
 const router = new Router();
 
-router.use('/:id/files', fileRouter);
+router.use('/:folderId/files', fileRouter);
 
 router.get('/new', folderControllers.folderCreateGet);
 

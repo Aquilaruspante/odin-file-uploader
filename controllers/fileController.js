@@ -55,7 +55,7 @@ exports.fileSend = async function fileSend(req, res, next) {
     let type;
     type = file.mimetype === 'video/quicktime' ? 'video/mp4' : file.mimetype;
     type = file.mimetype === 'application/vnd.oasis.opendocument.graphics' ? 'image/jpeg' : file.mimetype;
-    
+
     console.log(type);
     res.type(type);    
     res.sendFile(file.url);

@@ -200,9 +200,36 @@ button:hover {
 .folder-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 120px;
+    gap: 80px;
+    row-gap: 80px;
     margin: auto;
-    
+    box-sizing: border-box;
+    padding: 40px;
+}
+
+.folder-container a {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-folder {
+    font-size: 3rem;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(19, 19, 179);
+    border-radius: 8px;
+}
+
+.new-folder:hover {
+    background-color: rgb(33, 33, 202);
+    transition: 0.6s;
 }
 
 .login {
@@ -240,23 +267,6 @@ button:hover {
     text-align: center;
 }
 
-.new-folder {
-    font-size: 3rem;
-    vertical-align: middle;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80px;
-    height: 80px;
-    background-color: rgb(19, 19, 179);
-    border-radius: 8px;
-}
-
-.new-folder:hover {
-    background-color: rgb(33, 33, 202);
-    transition: 0.6s;
-}
-
 .new-folder-form {
     display: flex;
     flex-direction: column;
@@ -272,11 +282,19 @@ button:hover {
 
 .folder-name {
     text-align: center;
-    font-size: 2rem;
+    font-size: 1rem;
+    max-width: 80px;
+}
+
+.folder-title {
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 .file-name {
-    max-width: 80px;
+    max-width: 120px;
+    font-size: 1rem;
+    overflow-wrap: break-word;
 }
 
 .file-display {
@@ -303,11 +321,6 @@ button:hover {
 .create-folder-input {
     display: flex;
     justify-content: space-between;
-}
-
-.folder-name {
-    text-align: center;
-    font-size: 2rem;
 }
 
 .file-name {

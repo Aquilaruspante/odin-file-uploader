@@ -1,6 +1,6 @@
 <%- include('./header.ejs') %>
 
-<h2 class="folder-name"><%= folder.name %></h2>
+<h2 class="folder-title"><%= folder.name %></h2>
 <% if (!folder.files.length) { %>
     <p id="no-files-message">No files in this folder yet...</p>
     <a href="/folders/<%= folder.id %>/files/new" class="new-folder">
@@ -11,10 +11,10 @@
         <% for (let file of folder.files) { %>
             <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
                 <div class="folder-component new-folder"></div>
-                <p class="file-name"><%= file.name %></p>
+                <p class="file-name"><%= file.name.length > 12 ? `${file.name.slice(0, 11)}...${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
             </a>
         <% } %>
-        <a href="/folders/<%= folder.id %>/files/new" class="new-folder">
+        <a href="/folders/<%= folder.id %>/files/new" class="new-folder folder-component">
             <div class="folder-component new-folder">+</div>
         </a>
     </div>

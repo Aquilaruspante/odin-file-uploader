@@ -34,6 +34,7 @@ exports.fileGet = async function fileGet(req, res, next) {
         const file = await db.fileGetByid(id, folderId);
         if (file) {
             const category = fileCategory(file.mimetype);
+            console.log('category', category);
             res.render('file', { file, url, category });
         } else {
             const error = new ExpressError(404, 'Page not found!');
@@ -47,11 +48,15 @@ exports.fileGet = async function fileGet(req, res, next) {
 };
 
 exports.fileSend = async function fileSend(req, res, next) {
-    console.log('here');
     const { folderId, id } = req.params;
 
     const file = await db.fileGetByid(id, folderId);
 
-    res.type(file.mimetype);
+    let type;
+    type = file.mimetype === 'video/quicktime' ? 'video/mp4' : file.mimetype;
+    type = file.mimetype === 'application/vnd.oasis.opendocument.graphics' ? 'image/jpeg' : file.mimetype;
+    
+    console.log(type);
+    res.type(type);    
     res.sendFile(file.url);
 }

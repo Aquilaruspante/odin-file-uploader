@@ -322,6 +322,22 @@ button:hover {
     height: 400px;
 }
 
-.file-display img {
-    height: 250px;
+.file-display img, video, iframe {
+    height: 600px;
+}
+
+#preview-not-available {
+    height: 600px;
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 2px;
+    border-radius: 2px;
+}
+
+.file-display a {
+    text-decoration: underline;
 }

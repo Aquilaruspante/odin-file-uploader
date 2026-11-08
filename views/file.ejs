@@ -1,8 +1,14 @@
 <%- include('./header.ejs') %>
 
 <div class="file-display">
-    <% if (category === 'drawing' || category === 'image') { %>
+    <% if (category === 'image') { %>
         <img src="<%= url %>" alt="<%= file.name %>">
+    <% } else if (category === 'video') { %>
+        <video controls src="<%= url %>" alt=file-name"></video>
+    <% } else if (category === 'document' || category === 'pdf') { %>
+        <iframe id="iframe" style="height: 600px; flex-shrink: 0;" src="<%= url %>" frameborder="0"></iframe>
+    <% } else { %>
+        <p id="preview-not-available">Preview not avalilable</p>
     <% } %>
     <h2 class="file-title"><%= file.name %></h2>
     <p class="file-detail">Size: <%= file.size %></p>

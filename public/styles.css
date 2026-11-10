@@ -211,8 +211,8 @@ button:hover {
     width: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
+    gap: 12px;
 }
 
 .new-folder {
@@ -221,10 +221,14 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
+    max-width: 80px;
     height: 80px;
     background-color: rgb(19, 19, 179);
     border-radius: 8px;
+}
+
+.folder-component {
+    width: 100%;
 }
 
 .new-folder:hover {
@@ -293,7 +297,7 @@ button:hover {
 
 .file-name {
     max-width: 120px;
-    font-size: 1rem;
+    font-size: 0.83rem;
     overflow-wrap: break-word;
 }
 
@@ -321,10 +325,6 @@ button:hover {
 .create-folder-input {
     display: flex;
     justify-content: space-between;
-}
-
-.file-name {
-    max-width: 80px;
 }
 
 .file-display {

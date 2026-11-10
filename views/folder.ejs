@@ -11,7 +11,7 @@
         <% for (let file of folder.files) { %>
             <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
                 <div class="folder-component new-folder"></div>
-                <p class="file-name"><%= file.name.length > 12 ? `${file.name.slice(0, 11)}...${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
+                <p class="file-name"><%= file.name.length > 15 ? `${file.name.slice(0, 14)}(...).${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
             </a>
         <% } %>
         <a href="/folders/<%= folder.id %>/files/new" class="new-folder folder-component">

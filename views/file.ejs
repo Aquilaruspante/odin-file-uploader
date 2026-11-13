@@ -14,6 +14,7 @@
     <p class="file-detail">Size: <%= file.size %></p>
     <p class="file-detail">Uploaded: <%= file.createdat %></p>
     <a href="<%= url %>" download="">Download</a>
+    <a href="/folders/<%= file.folderId %>">Back</a>
 </div>
 
 <%- include('./footer.ejs') %>

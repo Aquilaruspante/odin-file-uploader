@@ -62,7 +62,6 @@ table {
   font-style: normal;
 }
 
-
 html {
     --primary-color: rgb(5, 5, 153);
     --text-color: rgb(212, 212, 231);
@@ -352,5 +351,15 @@ button:hover {
 }
 
 .file-display a {
+    text-decoration: underline;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.back-button {
     text-decoration: underline;
 }

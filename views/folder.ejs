@@ -10,7 +10,9 @@
     <div class="folder-container">
         <% for (let file of folder.files) { %>
             <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
-                <div class="folder-component new-folder"></div>
+                <div class="folder-component new-folder">
+                    <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,w_80/q_auto/f_auto' + file.url.split('upload')[1] %>" >
+                </div>
                 <p class="file-name"><%= file.name.length > 15 ? `${file.name.slice(0, 14)}(...).${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
             </a>
         <% } %>
@@ -19,6 +21,8 @@
         </a>
     </div>
 <% } %>
-
+<div class="link-container">
+    <a class="back-button" href="/">Back</a>
+</div>
 
 <%- include('./footer.ejs') %>

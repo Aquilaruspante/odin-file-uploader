@@ -1,6 +1,7 @@
 const db = require('../db/queries');
 const fileCategory = require('../utils/extractMimetype');
 const ExpressError = require('../ExpressError');
+const cloudinary = require('../config/cloudinary');
 
 exports.fileCreateGet = function fileCreateGet(req, res) {
     const { folderId } = req.params;
@@ -10,31 +11,48 @@ exports.fileCreateGet = function fileCreateGet(req, res) {
 
 exports.fileCreatePost = async function fileCreatePost(req, res, next) {
     const { folderId } = req.params;
-    const { originalname, size, mimetype, filename } = req.file;
+    const { originalname, size, mimetype, filename, buffer } = req.file;
 
-    await db.fileCreate(folderId, originalname, size, mimetype, filename);
 
-    req.session.messages = { type: 'succes', message: 'File uploaded succesfully!' };
-    return req.session.save(err => {
-        if (err) next(err);
-        res.redirect(`/folders/${folderId}`);
-    });
+    if (process.env.STORAGE === 'cloudinary') {
+        cloudinary.uploader.upload_stream({ resource_type: 'auto' }, async (error, result) => {
+            if(error) return next(error);
+    
+            await db.fileCreate(folderId, originalname, size, mimetype, filename, result.secure_url);
+
+            req.session.messages = { type: 'succes', message: 'File uploaded succesfully!' };
+            return req.session.save(err => {
+                if (err) next(err);
+                res.redirect(`/folders/${folderId}`);
+            });
+        }).end(buffer);
+    } else {
+        await db.fileCreate(folderId, originalname, size, mimetype, filename, null);
+
+        req.session.messages = { type: 'succes', message: 'File uploaded succesfully locally!' };
+        return req.session.save(err => {
+            if (err) next(err);
+            res.redirect(`/folders/${folderId}`);
+        });
+    }    
 };
 
 exports.fileGet = async function fileGet(req, res, next) {
     const { id, folderId } = req.params;
 
-    let url;
-
-    if (process.env.STORAGE === 'local') {
-        url = `/folders/${folderId}/files/${id}/view`;
-    }
-
     try {
         const file = await db.fileGetByid(id, folderId);
         if (file) {
+
+            let url;
+
+            if (file.url.startsWith('/home')) {
+                url = `/folders/${folderId}/files/${id}/view`;
+            } else {
+                url = file.url;
+            };
+
             const category = fileCategory(file.mimetype);
-            console.log('category', category);
             res.render('file', { file, url, category });
         } else {
             const error = new ExpressError(404, 'Page not found!');

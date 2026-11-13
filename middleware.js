@@ -16,7 +16,7 @@ exports.isAuth = function isAuth(req, res, next) {
 exports.fileNotNull = function fileNotNull(req, res, next) {
     const { folderId } = req.params;
 
-    if (req.file) return nrxt();
+    if (req.file) return next();
 
     req.session.messages = { type: 'failure', message: "File field can't be empty" };
     req.session.save(err => {

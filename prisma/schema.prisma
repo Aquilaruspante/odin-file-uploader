@@ -36,6 +36,8 @@ model File {
   name         String          
   size         Float
   mimetype     String
+  publicId     String
+  resourceType String
   createdat    DateTime        @default(now())
   folder       Folder          @relation(fields: [folderId], references: [id], onDelete: Cascade)
   folderId     Int

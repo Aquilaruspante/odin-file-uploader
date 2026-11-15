@@ -107,7 +107,7 @@ h1 {
 }
 
 nav {
-    width: 230px;
+    width: 150px;
     display: flex;
     justify-content: space-between;
 }
@@ -203,7 +203,7 @@ button:hover {
     row-gap: 80px;
     margin: auto;
     box-sizing: border-box;
-    padding: 40px;
+    
 }
 
 .folder-container a {

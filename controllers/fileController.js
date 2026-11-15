@@ -76,4 +76,21 @@ exports.fileSend = async function fileSend(req, res, next) {
 
     res.type(type);    
     res.sendFile(file.url);
-}
+};
+
+exports.fileDelete = async function fileDelete(req, res, next) {
+    const { id, folderId } = req.params;
+
+    try {
+        await db.fileDeleteById(parseInt(id));
+
+        req.session.messages = { type: 'success', message: 'File succesfully deleted!' };
+        return req.session.save(err => {
+            if (err) return next(err);
+            res.redirect(`/folders/${folderId}`);
+        });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    };
+};

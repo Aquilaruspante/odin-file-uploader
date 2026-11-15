@@ -383,3 +383,37 @@ img {
     flex-direction: row;
     justify-content: space-around;
 }
+
+.file-delete-form {
+    border: none;
+    width: fit-content;
+    height: fit-content;
+    padding: 0px;
+    margin: 0px;
+}
+
+.file-delete-form button {
+    text-decoration: underline;
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    width: fit-content;
+    height: fit-content;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border-radius: 0px;
+}
+
+.file-delete-form button:hover {
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.download-and-delete-line {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}

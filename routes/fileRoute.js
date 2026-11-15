@@ -24,4 +24,6 @@ router.get('/:id/view', fileController.fileSend);
 
 router.get('/:id', fileController.fileGet);
 
+router.delete('/:id', fileController.fileDelete);
+
 module.exports = router;

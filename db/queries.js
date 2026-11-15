@@ -92,10 +92,13 @@ exports.fileCreate = async function fileCreate(folderId, name, size, mimetype, d
 };
 
 exports.fileGetByid = async function fileGetById(id, folderId) {
-    console.log(id, folderId);
     const file = await prisma.file.findFirst({ 
         where: { id: parseInt(id), folderId: parseInt(folderId) }
     });
 
     return file;
+};
+
+exports.fileDeleteById = async function fileDeleteById(id) {
+    await prisma.file.delete({ where: { id } });
 };

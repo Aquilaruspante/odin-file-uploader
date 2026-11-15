@@ -2,7 +2,6 @@ const db = require('../db/queries');
 const fileCategory = require('../utils/extractMimetype');
 const ExpressError = require('../ExpressError');
 const cloudinary = require('../config/cloudinary');
-const { extractPublicId } = require('cloudinary-build-url');
 
 exports.fileCreateGet = function fileCreateGet(req, res) {
     const { folderId } = req.params;
@@ -84,9 +83,7 @@ exports.fileDelete = async function fileDelete(req, res, next) {
 
     try {
         const file = await db.fileGetByid(id, folderId);
-        const publicId = extractPublicId(file.url);
-        const resource_type = file.mimetype.startsWith('video') ? 'video' : 'image';
-        cloudinary.uploader.destroy(publicId, { resource_type, invalidate: true })
+        cloudinary.uploader.destroy(file.publicId, { resource_type: file.resourceType, invalidate: true })
             .then(async (result) => {
                 if (result.result === 'ok') {
                     await db.fileDeleteById(parseInt(id));

@@ -30,8 +30,8 @@ exports.fileNotNull = function fileNotNull(req, res, next) {
 };
 
 exports.isFolderOwner = async function isFolderOwner(req, res, next) {
-    const { id } = req.params;
-    const folder = await db.folderGetById(parseInt(id));
+    const { folderId } = req.params;
+    const folder = await db.folderGetById(parseInt(folderId));
 
     if (folder.userId === req.user.id) return next();
 

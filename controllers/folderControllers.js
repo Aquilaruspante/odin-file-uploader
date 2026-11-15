@@ -3,8 +3,8 @@ const ExpressError = require('../ExpressError');
 const { validationResult, matchedData } = require('express-validator');
 
 exports.folderGet = async function(req, res, next) {
-    const { id } = req.params;
-    const folder = await db.folderGetById(parseInt(id));
+    const { folderId } = req.params;
+    const folder = await db.folderGetById(parseInt(folderId));
 
     if (folder.userId === req.user.id) {
         res.render('folder', { folder });
@@ -38,10 +38,10 @@ exports.folderCreatePost = async function folderCreatePost(req, res, next) {
 };
 
 exports.folderDelete = async function(req, res, next) {
-    const { id } = req.params;
+    const { folderId } = req.params;
 
     try {
-        await db.folderDeletebyId(parseInt(id));
+        await db.folderDeletebyId(parseInt(folderId));
 
         req.session.messages = { type: 'success', message: 'Folder succesfully deleted!' };
         return req.session.save(err => {

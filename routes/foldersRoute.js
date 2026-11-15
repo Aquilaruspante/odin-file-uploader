@@ -10,9 +10,9 @@ router.use('/:folderId/files', isAuth, isFolderOwner, fileRouter);
 
 router.get('/new', folderControllers.folderCreateGet);
 
-router.get('/:id', isAuth, isFolderOwner, folderControllers.folderGet);
+router.get('/:folderId', isAuth, isFolderOwner, folderControllers.folderGet);
 
-router.delete('/:id', isAuth, isFolderOwner, folderControllers.folderDelete);
+router.delete('/:folderId', isAuth, isFolderOwner, folderControllers.folderDelete);
 
 router.post('/', isAuth, folderValidator,  folderControllers.folderCreatePost);
 

@@ -2,6 +2,7 @@ const db = require('../db/queries');
 const fileCategory = require('../utils/extractMimetype');
 const ExpressError = require('../ExpressError');
 const cloudinary = require('../config/cloudinary');
+const { extractPublicId } = require('cloudinary-build-url');
 
 exports.fileCreateGet = function fileCreateGet(req, res) {
     const { folderId } = req.params;
@@ -82,15 +83,31 @@ exports.fileDelete = async function fileDelete(req, res, next) {
     const { id, folderId } = req.params;
 
     try {
-        await db.fileDeleteById(parseInt(id));
+        const file = await db.fileGetByid(id, folderId);
+        const publicId = extractPublicId(file.url);
+        const resource_type = file.mimetype.startsWith('video') ? 'video' : 'image';
+        cloudinary.uploader.destroy(publicId, { resource_type, invalidate: true })
+            .then(async (result) => {
+                if (result.result === 'ok') {
+                    await db.fileDeleteById(parseInt(id));
 
-        req.session.messages = { type: 'success', message: 'File succesfully deleted!' };
-        return req.session.save(err => {
-            if (err) return next(err);
-            res.redirect(`/folders/${folderId}`);
-        });
-    } catch (err) {
-        console.log(err);
-        next(err);
-    };
+                    req.session.messages = { type: 'success', message: 'File succesfully deleted!' };
+                    return req.session.save(err => {
+                        if (err) return next(err);
+                        res.redirect(`/folders/${folderId}`);
+                    });
+                } else {
+                    const error = new ExpressError(404, 'file not found');
+                    return next(error);
+                }
+                
+            })
+            .catch(err => {
+                console.log(err);
+                return next(new ExpressError());
+            });
+        } catch (err) {
+            console.log(err);
+            next(err);
+        };
 };

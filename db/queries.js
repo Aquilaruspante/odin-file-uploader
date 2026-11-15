@@ -77,14 +77,13 @@ exports.folderDeletebyId = async function folderDeleteById(id) {
 /*--------------------------------------------- Files -------------------------*/
 
 exports.fileCreate = async function fileCreate(folderId, name, size, mimetype, destName, url) {
-    console.log('destname', destName);
     const file = await prisma.file.create({
         data: {
             name: name,
             url: url ? url : path.join(__dirname, '..', `uploads/${destName}`),
             size: parseFloat(size),
             mimetype: mimetype,
-            folderId: parseInt(folderId)
+            folderId: parseInt(folderId),
         }
     });
 

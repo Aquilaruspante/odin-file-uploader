@@ -44,11 +44,6 @@ require('./config/passport.js')
 app.use(passport.session());
 
 app.use((req, res, next) => {
-    console.log('session', req.session);
-    next();
-});
-
-app.use((req, res, next) => {
     res.locals.user = req.user;
     if (req.session.messages) {
         res.locals.messages = req.session.messages;

@@ -59,8 +59,6 @@ app.use((req, res, next) => {
 
 /*----------------------------------------------- Routes -------------------------------*/
 
-console.log(process.env.STORAGE, typeof process.env.STORAGE);
-
 app.get('/', (req, res) => {
     if (req.isAuthenticated()) {
         res.render('home');

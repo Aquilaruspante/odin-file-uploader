@@ -11,8 +11,12 @@
         <% for (let file of folder.files) { %>
             <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
                 <div class="folder-component new-folder">
-                    <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,w_80/q_auto/f_auto' + file.url.split('upload')[1] %>" >
-                </div>
+                    <% if (file.mimetype.split('/')[0] === 'video') { %>
+                        <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80' + file.url.split('upload')[1].split('.')[0] + '.jpg' %>" alt="">
+                    <% } else { %>
+                        <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80/q_auto/f_auto' + file.url.split('upload')[1] %>" alt="Preview not available">
+                    <% } %>
+                    </div>
                 <p class="file-name"><%= file.name.length > 15 ? `${file.name.slice(0, 14)}(...).${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
             </a>
         <% } %>

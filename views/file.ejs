@@ -4,7 +4,7 @@
     <% if (category === 'image') { %>
         <img src="<%= url %>" alt="<%= file.name %>">
     <% } else if (category === 'video') { %>
-        <video controls src="<%= url %>" alt=file-name"></video>
+        <video controls src="<%= url %>" alt="Problems downloading video"></video>
     <% } else if (category === 'document' || category === 'pdf') { %>
         <iframe id="iframe" style="height: 600px; flex-shrink: 0;" src="<%= url %>" frameborder="0"></iframe>
     <% } else { %>

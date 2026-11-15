@@ -53,6 +53,7 @@ exports.fileGet = async function fileGet(req, res, next) {
             };
 
             const category = fileCategory(file.mimetype);
+            console.log(file.mimetype);
             res.render('file', { file, url, category });
         } else {
             const error = new ExpressError(404, 'Page not found!');

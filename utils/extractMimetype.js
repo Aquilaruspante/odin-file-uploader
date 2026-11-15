@@ -2,7 +2,7 @@ const APPLICATION_TYPES = {
   'application/pdf': 'pdf',
   'application/zip': 'archive',
   'application/msword': 'document',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'document',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'other',
   'application/vnd.oasis.opendocument.text': 'document',
   'application/vnd.ms-excel': 'spreadsheet',
   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'spreadsheet',

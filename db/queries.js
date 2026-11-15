@@ -70,6 +70,10 @@ exports.folderCreate = async function folderCreate(name, userId) {
     return folder;
 };
 
+exports.folderDeletebyId = async function folderDeleteById(id) {
+    await prisma.folder.delete({ where: { id } });
+}
+
 /*--------------------------------------------- Files -------------------------*/
 
 exports.fileCreate = async function fileCreate(folderId, name, size, mimetype, destName, url) {

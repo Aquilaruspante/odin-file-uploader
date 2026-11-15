@@ -9,7 +9,6 @@ let upload;
 if (process.env.STORAGE === 'local') {
     upload = multer({ dest: path.join(__dirname, '..', 'uploads') });
 } else if (process.env.STORAGE === 'cloudinary') {
-    console.log('cloudinary');
     const storage = multer.memoryStorage();
     upload = multer({ storage: storage });
 };

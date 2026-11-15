@@ -1,6 +1,12 @@
 <%- include('./header.ejs') %>
 
-<h2 class="folder-title"><%= folder.name %></h2>
+<div class="folder-header">
+    <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST" id="folder-title-container">
+        <h2 class="folder-title"><%= folder.name %></h2>
+        <button>Delete</button>
+    </form>
+</div>
+
 <% if (!folder.files.length) { %>
     <p id="no-files-message">No files in this folder yet...</p>
     <a href="/folders/<%= folder.id %>/files/new" class="new-folder">

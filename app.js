@@ -4,6 +4,7 @@ const session = require('express-session');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { prisma } = require('./db/prisma.js');
 const passport = require('passport');
+const methodOverride = require('method-override');
 
 
 const userRouter = require('./routes/userRoutes.js');
@@ -19,6 +20,8 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ static: true }));
+
+app.use(methodOverride('_method'));
 
 /* ------------------------------------------------- Session management -------------------------*/
 

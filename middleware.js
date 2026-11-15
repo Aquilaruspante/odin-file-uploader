@@ -1,12 +1,15 @@
 const ExpressError = require('./ExpressError');
+const db = require('./db/queries');
 
 exports.isNotAuth = function isAuth(req, res, next) {
+    // che there is a not an authenticated user.
     if (!req.isAuthenticated()) return next();
 
     res.redirect('/');
 };
 
 exports.isAuth = function isAuth(req, res, next) {
+    // check there is a user.
     if (req.isAuthenticated()) return next();
 
     const error = new ExpressError(401, 'Unauthorized!');
@@ -14,6 +17,7 @@ exports.isAuth = function isAuth(req, res, next) {
 };
 
 exports.fileNotNull = function fileNotNull(req, res, next) {
+    // check file field is not null
     const { folderId } = req.params;
 
     if (req.file) return next();
@@ -23,4 +27,13 @@ exports.fileNotNull = function fileNotNull(req, res, next) {
         if (err) return next(err);
         res.redirect(`/folders/${folderId}/files/new`);
     });
+};
+
+exports.isFolderOwner = async function isFolderOwner(req, res, next) {
+    const { id } = req.params;
+    const folder = await db.folderGetById(parseInt(id));
+
+    if (folder.userId === req.user.id) return next();
+
+    res.redirect('/');
 };

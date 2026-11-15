@@ -20,7 +20,6 @@ passport.use(new Strategy(async (username, password, done) => {
 }));
 
 passport.serializeUser((user, done) => {
-    console.log('user', user);
     done(null, user.id)
 });
 

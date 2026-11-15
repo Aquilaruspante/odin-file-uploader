@@ -36,3 +36,21 @@ exports.folderCreatePost = async function folderCreatePost(req, res, next) {
         });
     };
 };
+
+exports.folderDelete = async function(req, res, next) {
+    const { id } = req.params;
+
+    try {
+        await db.folderDeletebyId(parseInt(id));
+
+        req.session.messages = { type: 'success', message: 'Folder succesfully deleted!' };
+        return req.session.save(err => {
+            if (err) return next(err);
+            res.redirect('/');
+        }) 
+    } catch (err) {
+        console.log(err);
+        const error = new ExpressError();
+        next(error);
+    };
+};

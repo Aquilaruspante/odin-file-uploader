@@ -367,3 +367,9 @@ button:hover {
 img {
     font-size: 1rem;
 }
+
+#folder-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

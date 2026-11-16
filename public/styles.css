@@ -316,7 +316,7 @@ button:hover {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 300px;
+    height: 100%;
 }
 
 .new-folder:hover {
@@ -337,16 +337,8 @@ button:hover {
     justify-content: space-between;
 }
 
-.file-display {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 400px;
-}
-
 .file-display img, video, iframe {
-    height: 600px;
+    height: 550px;
 }
 
 #preview-not-available {
@@ -363,6 +355,11 @@ button:hover {
 
 .file-display a {
     text-decoration: underline;
+}
+
+.file-title {
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 .link-container {
@@ -450,4 +447,5 @@ img {
     display: flex;
     gap: 8px;
     align-items: center;
+    font-size: 1.2rem;
 }

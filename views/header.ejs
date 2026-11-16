@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <title>File Uploader</title>
 </head>
-<body class="silkscreen-regular">
+<body>
     <header>
         <div class="menu-container">
             <a href="/">
@@ -29,5 +29,5 @@
     </header>
     <main>
         <% if (locals.messages) { %>
-            <p class="flash-message <%= messages.type %>""><%= messages.message %></p>
+            <p class="flash-message <%= messages.type %> silkscreen-regular"><%= messages.message %></p>
         <% } %>

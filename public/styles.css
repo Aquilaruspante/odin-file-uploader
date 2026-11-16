@@ -65,6 +65,7 @@ table {
 html {
     --primary-color: rgb(5, 5, 153);
     --text-color: rgb(212, 212, 231);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body {
@@ -107,7 +108,7 @@ h1 {
 }
 
 nav {
-    width: 150px;
+    width: 200px;
     display: flex;
     justify-content: space-between;
 }
@@ -222,7 +223,7 @@ button:hover {
     align-items: center;
     max-width: 80px;
     height: 80px;
-    
+    border: 1px dotted var(--text-color);
     border-radius: 8px;
 }
 
@@ -372,16 +373,49 @@ button:hover {
 
 .back-button {
     text-decoration: underline;
+    position: absolute;
+    bottom: 32px;
 }
 
 img {
     font-size: 1rem;
 }
 
-#folder-title-container {
+.folder-header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.folder-header p {
+    font-size: 2rem;
+}
+
+.folder-header-left {
+    display: flex;
+    gap: 16px;
+}
+
+#delete-folder-button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    width: 150px;
+    border: 1px solid var(--text-color);
+    font-size: 1rem;
+}
+
+#delete-folder-button:hover {
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    transition: 0.4s;
+}
+
+#folder-title-container {
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    margin: 0px;
+    padding: 0px;
 }
 
 .file-delete-form {

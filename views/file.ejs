@@ -11,12 +11,12 @@
         <p id="preview-not-available">Preview not avalilable</p>
     <% } %>
     <h2 class="file-title"><%= file.name %></h2>
-    <p class="file-detail">Size: <%= file.size %></p>
+    <p class="file-detail">Size: <%= size %></p>
     <p class="file-detail">Uploaded: <%= file.createdat %></p>
     <div class="download-and-delete-line">
         <a href="<%= url %>" download="">Download</a>
         <form action="/folders/<%= file.folderId %>/files/<%= file.id %>?_method=DELETE" method="POST" class="file-delete-form">
-            <button class="fake-link silkscreen-regular">Delete</button>
+            <button class="fake-link">Delete</button>
         </form>
     </div>
     

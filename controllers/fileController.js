@@ -42,7 +42,16 @@ exports.fileGet = async function fileGet(req, res, next) {
 
     try {
         const file = await db.fileGetByid(id, folderId);
+
         if (file) {
+
+            let size;
+
+            if (file.size.toString().length > 6) {
+                size = file.size.toString().slice(0, -6) + '.' + file.size.toString().slice(-6, -4) + 'MB';
+            } else if (file.size.toString().length > 3) {
+                size = file.size.toString().slice(0, -3) + '.' + file.size.toString().slice(-3, -1) + 'KB';
+            };
 
             let url;
 
@@ -53,7 +62,7 @@ exports.fileGet = async function fileGet(req, res, next) {
             };
 
             const category = fileCategory(file.mimetype);
-            res.render('file', { file, url, category });
+            res.render('file', { file, url, category, size });
         } else {
             const error = new ExpressError(404, 'Page not found!');
             next(error);

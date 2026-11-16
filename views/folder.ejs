@@ -1,16 +1,19 @@
 <%- include('./header.ejs') %>
 
 <div class="folder-header">
+    <div class="folder-header-left">
+        <p>/</p>
+        <h2 class="folder-title silkscreen-regular"><%= folder.name %></h2>
+    </div>
     <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST" id="folder-title-container">
-        <h2 class="folder-title"><%= folder.name %></h2>
-        <button>Delete</button>
+        <button id="delete-folder-button" class="silkscreen-regular">Delete folder</button>
     </form>
 </div>
 
 <% if (!folder.files.length) { %>
     <div id="no-files-message-container">
-        <p id="no-files-message">No files in this folder yet...</p>
-        <a href="/folders/<%= folder.id %>/files/new" class="new-folder">
+        <p id="no-files-message" class="silkscreen-regular">No files in this folder yet...</p>
+        <a href="/folders/<%= folder.id %>/files/new" class="new-folder folder-component">
             <div class="folder-component new-folder">+</div>
         </a>
     </div>

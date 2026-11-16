@@ -2,7 +2,6 @@ const db = require('../db/queries');
 const ExpressError = require('../ExpressError');
 const { validationResult, matchedData } = require('express-validator');
 const cloudinary = require('../config/cloudinary');
-const { extractPublicId } = require('cloudinary-build-url');
 
 exports.folderGet = async function(req, res, next) {
     const { folderId } = req.params;

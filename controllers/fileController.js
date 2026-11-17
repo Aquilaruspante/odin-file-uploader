@@ -41,7 +41,7 @@ exports.fileGet = async function fileGet(req, res, next) {
     const { id, folderId } = req.params;
 
     try {
-        const file = await db.fileGetByid(id, folderId);
+        const file = await db.fileGetByidAndFolderId(id, folderId);
 
         if (file) {
 
@@ -91,7 +91,7 @@ exports.fileDelete = async function fileDelete(req, res, next) {
     const { id, folderId } = req.params;
 
     try {
-        const file = await db.fileGetByid(id, folderId);
+        const file = await db.fileGetByidAndFolderId(id, folderId);
         cloudinary.uploader.destroy(file.publicId, { resource_type: file.resourceType, invalidate: true })
             .then(async (result) => {
                 if (result.result === 'ok') {

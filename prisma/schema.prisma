@@ -18,6 +18,13 @@ model User {
   email        String          @unique
   hashedPW     String
   folders      Folder[]
+  role         Role            @default(USER)
+  banned       Boolean         @default(false)
+}
+
+enum Role {
+  USER
+  ADMIN
 }
 
 model Folder {

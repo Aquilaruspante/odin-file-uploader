@@ -39,8 +39,18 @@ exports.userGetByUsername = async function userGetByUsername(username) {
 exports.userGetById = async function userGetById(id) {
     const user = await prisma.user.findFirst({
         where: { id: id },
-        include: { folders: true }
     });
+
+    const folders = await prisma.folder.findMany({
+        where: {
+            userId: user.id,
+        }, 
+        include: {
+            files: true
+        }
+    });
+
+    user.folders = folders;
 
     return user;
 };
@@ -53,15 +63,25 @@ exports.userGetByEmail = async function userGetByEmail(email) {
     return user;
 };
 
+exports.usersGet = async function usersGet() {
+    const users = await prisma.user.findMany();
+
+    return users;
+};
+
+exports.userDeleteById = async function userDeleteById(id) {
+    await prisma.user.delete({ where: { id }});
+};
+
 
 /*--------------------------------------------- Folders ----------------------*/
 
-exports.folderGetById = async function folderGetById(id) {
+exports.folderGetById = async function folderGetById(id) {    
     const folder = await prisma.folder.findFirst({
         where: { id: id },
         include: { files: true }
-    });
-     return folder;
+    });    
+    return folder;
 };
 
 exports.folderCreate = async function folderCreate(name, userId) {    
@@ -73,6 +93,12 @@ exports.folderCreate = async function folderCreate(name, userId) {
 exports.folderDeletebyId = async function folderDeleteById(id) {
     await prisma.folder.delete({ where: { id } });
 }
+
+exports.foldersGet = async function foldersGet() {
+    const folders = await prisma.folder.findMany()
+
+    return folders;
+};
 
 /*--------------------------------------------- Files -------------------------*/
 
@@ -92,7 +118,7 @@ exports.fileCreate = async function fileCreate(folderId, name, size, mimetype, d
     return file;
 };
 
-exports.fileGetByid = async function fileGetById(id, folderId) {
+exports.fileGetByidAndFolderId = async function fileGetById(id, folderId) {
     const file = await prisma.file.findFirst({ 
         where: { id: parseInt(id), folderId: parseInt(folderId) }
     });
@@ -100,6 +126,24 @@ exports.fileGetByid = async function fileGetById(id, folderId) {
     return file;
 };
 
+exports.fileGetById = async function fileGetById(id) {
+    const file = await prisma.file.findFirst({ where: { id }});
+
+    const folder = await prisma.folder.findFirst({ where: { id: file.folderId }});
+
+    const user = await prisma.user.findFirst({ where: { id: folder.userId }});
+
+    file.user = user;
+    
+    return file;
+};
+
 exports.fileDeleteById = async function fileDeleteById(id) {
     await prisma.file.delete({ where: { id } });
 };
+
+exports.filesGet = async function filesGet() {
+    const files = await prisma.file.findMany();
+
+    return files;
+}

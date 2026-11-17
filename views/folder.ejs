@@ -27,7 +27,7 @@
                     <% } else { %>
                         <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80/q_auto/f_auto' + file.url.split('upload')[1] %>" alt="Preview not available">
                     <% } %>
-                    </div>
+                </div>
                 <p class="file-name"><%= file.name.length > 15 ? `${file.name.slice(0, 14)}(...).${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
             </a>
         <% } %>

@@ -5,13 +5,25 @@ const cloudinary = require('../config/cloudinary');
 
 exports.folderGet = async function(req, res, next) {
     const { folderId } = req.params;
-    const folder = await db.folderGetById(parseInt(folderId));
 
-    if (folder.userId === req.user.id) {
-        res.render('folder', { folder });
-    } else {
-        const error = new ExpressError(404, 'Page not found!');
-        next(error);
+    console.log(folderId, parseInt(folderId));
+
+    if (isNaN(parseInt(folderId))) return next(new ExpressError(400, 'Bad request!'));
+
+    try {
+        const folder = await db.folderGetById(parseInt(folderId));
+
+        if (!folder) return next(new ExpressError(404, 'Folder not found!'));
+
+        if (folder.userId === req.user.id) {
+            res.render('folder', { folder });
+        } else {
+            const error = new ExpressError(404, 'Page not found!');
+            next(error);
+        };
+    } catch (err) {
+        console.log('this is an error', err);
+        next(new ExpressError());
     };
 };
 

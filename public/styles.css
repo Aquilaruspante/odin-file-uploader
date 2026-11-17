@@ -449,3 +449,35 @@ img {
     align-items: center;
     font-size: 1.2rem;
 }
+
+.user-folder {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 16px;
+    gap: 16px;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    margin-bottom: 32px;
+}
+
+.user-folder-files {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#filelist, #userlist {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.back-link {
+    text-decoration: underline;
+}

@@ -9,8 +9,10 @@ const methodOverride = require('method-override');
 
 const userRouter = require('./routes/userRoutes.js');
 const foldersRoute = require('./routes/foldersRoute.js');
+const adminRoutes = require('./routes/adminRoutes.js');
 
-const { isAuth } = require('./middleware.js');
+const { isAuth, isAdmin } = require('./middleware.js');
+const ExpressError = require('./ExpressError.js');
 
 const app = express();
 
@@ -69,10 +71,14 @@ app.use('/users', userRouter);
 
 app.use('/folders', isAuth, foldersRoute);
 
+app.use('/admin', isAuth, isAdmin, adminRoutes);
+
 app.use((err, req, res, next) => {
     console.log(err);
 
-    const { status, message } = err;
+    const status = err instanceof ExpressError ? err.status : 500;
+    const message = err instanceof ExpressError ? err.message : 'Internal server error';
+
     res.status(status || 500).render('error', { status, message });
 });
 

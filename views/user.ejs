@@ -1,0 +1,40 @@
+<%- include('./header.ejs') %>
+
+<div class="dashboard-header">
+    <div class="left-side">
+        <h2 style="margin-bottom: 16px;"><%= currentUser.username %></h2>
+        <p style="margin-bottom: 32px;">Email: <%= currentUser.email %></p>
+    </div>
+    <% if (currentUser.role === 'ADMIN') { %>
+        <p style="color: red;">ADMIN</p>
+    <% } else { %>
+        <form action="/admin/users/<%= currentUser.id %>?_method=DELETE" method="POST" class="file-delete-form">    
+            <button style="color: red;">Ban User</button>
+        </form>
+    <% } %>
+</div>
+
+<div class="user-files">
+    <% for (let folder of currentUser.folders) { %>
+        <div class="user-folder">
+            <a href="/admin/folders/<%= folder.id %>"><%= folder.name %></a>
+            <div class="user-folder-files">
+                <% for (let file of folder.files) { %>
+                    <a href="/admin/files/<%= file.id %>">
+                        <div class="folder-component new-folder">
+                            <% if (file.mimetype.split('/')[0] === 'video') { %>
+                                <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80' + file.url.split('upload')[1].split('.')[0] + '.jpg' %>" alt="">
+                            <% } else { %>
+                                <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80/q_auto/f_auto' + file.url.split('upload')[1] %>" alt="Preview not available">
+                            <% } %>
+                        </div>
+                        <p class="file-name"><%= file.name.length > 15 ? `${file.name.slice(0, 14)}(...).${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</div>
+<a href="/admin/users">Back</a>
+
+<%- include('./footer.ejs') %>

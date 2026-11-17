@@ -1,0 +1,10 @@
+<%- include('./header') %>
+
+<div id="userlist">
+    <% for (let user of users) { %>
+        <a href="/admin/users/<%= user.id %>"><%= user.username %></a>
+    <% } %>
+</div>
+<a class="back-link" href="/admin">Back</a>
+
+<%- include('./footer') %>

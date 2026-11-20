@@ -76,3 +76,11 @@ exports.folderDelete = async function(req, res, next) {
         next(error);
     };
 };
+
+exports.folderShare = async function folderShare(req, res, next) {
+    const { folderId } = req.params;
+
+    const folder = await db.folderGetById(parseInt(folderId));
+
+    res.render('share-form', { folder });
+};

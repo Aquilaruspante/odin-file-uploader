@@ -5,9 +5,15 @@
         <p>/</p>
         <h2 class="folder-title silkscreen-regular"><%= folder.name %></h2>
     </div>
-    <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST" id="folder-title-container">
-        <button id="delete-folder-button" class="silkscreen-regular">Delete folder</button>
-    </form>
+    <% if (locals.user) { %>
+        <div class="folder-header-right">
+            <a class="share-folder-link silkscreen-regular" href="/folders/<%= folder.id %>/share">Share folder</a>
+            <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST" id="folder-title-container">
+                <button id="delete-folder-button" class="silkscreen-regular">Delete folder</button>
+            </form>
+        </div>
+    <% } %>
+    
 </div>
 
 <% if (!folder.files.length) { %>
@@ -23,7 +29,7 @@
             <a href="/folders/<%= folder.id %>/files/<%= file.id %>">
                 <div class="folder-component new-folder">
                     <% if (file.mimetype.split('/')[0] === 'video') { %>
-                        <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80' + file.url.split('upload')[1].split('.')[0] + '.jpg' %>" alt="">
+                        <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80' + file.url.split('upload')[1].split('.')[0] + '.jpg' %>" alt="Preview not available">
                     <% } else { %>
                         <img src="<%= file.url.split('upload')[0] + 'upload' + '/c_scale,h_80/q_auto/f_auto' + file.url.split('upload')[1] %>" alt="Preview not available">
                     <% } %>

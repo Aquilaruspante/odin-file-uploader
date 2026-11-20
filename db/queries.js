@@ -1,3 +1,4 @@
+const { folderShare } = require('../controllers/folderControllers');
 const { prisma } = require('./prisma');
 const path = require('node:path');
 
@@ -100,6 +101,14 @@ exports.foldersGet = async function foldersGet() {
     return folders;
 };
 
+exports.getFolderByShareCode = async function getFolderByShareCode(code) {
+    const share = await prisma.folderShare.findFirst({ where: { id: code }});
+
+    const folder = await prisma.folder.findFirst({ where: { id: share.folderId }});
+
+    return folder;
+};
+
 /*--------------------------------------------- Files -------------------------*/
 
 exports.fileCreate = async function fileCreate(folderId, name, size, mimetype, destName, url, publicId, resourceType) {
@@ -147,3 +156,30 @@ exports.filesGet = async function filesGet() {
 
     return files;
 }
+
+/*------------------------------------------------ FolderShare -------------------------------------*/
+
+exports.folderShareCreate = async function folderShareCreate(folderId, duration) {
+    const daysInMilliseconds = duration * 24 * 60 * 60 * 1000;
+    const nowDate = new Date();
+    const expiryEpoch = nowDate.getTime() + daysInMilliseconds;
+
+    const folderShare = await prisma.folderShare.create({
+        data: {
+            folderId: folderId,
+            expiresAt: new Date(expiryEpoch)
+        }
+    });
+
+    return folderShare;
+};
+
+exports.folderShareGet = async function folderShareGet(shareId) {
+    const folderShare = await prisma.folderShare.findFirst({
+        where: {
+            id: shareId
+        }
+    })
+
+   return folderShare;
+};

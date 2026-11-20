@@ -15,7 +15,7 @@ exports.fileCreatePost = async function fileCreatePost(req, res, next) {
 
 
     if (process.env.STORAGE === 'cloudinary') {
-        cloudinary.uploader.upload_stream({ resource_type: 'auto' }, async (error, result) => {
+        cloudinary.uploader.upload_stream({ resource_type: 'auto', invalidate: true }, async (error, result) => {
             if(error) return next(error);
     
             await db.fileCreate(folderId, originalname, size, mimetype, filename, result.secure_url, result.public_id, result.resource_type);

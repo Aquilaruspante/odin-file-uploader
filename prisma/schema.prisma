@@ -33,6 +33,7 @@ model Folder {
   files        File[]
   user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       Int
+  folderShares FolderShare[]
 
   @@index([userId])
 }
@@ -57,4 +58,14 @@ model Session {
   sid       String   @unique
   data      String   
   expiresAt   DateTime
+}
+
+model FolderShare {
+  id         String         @id @default(uuid())
+  folder     Folder         @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  folderId   Int
+  expiresAt  DateTime
+  createdAt  DateTime       @default(now())
+
+  @@index([expiresAt])
 }

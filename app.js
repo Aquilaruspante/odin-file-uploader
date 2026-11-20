@@ -10,6 +10,7 @@ const methodOverride = require('method-override');
 const userRouter = require('./routes/userRoutes.js');
 const foldersRoute = require('./routes/foldersRoute.js');
 const adminRoutes = require('./routes/adminRoutes.js');
+const shareRoutes = require('./routes/shareRoutes.js')
 
 const { isAuth, isAdmin } = require('./middleware.js');
 const ExpressError = require('./ExpressError.js');
@@ -72,6 +73,8 @@ app.use('/users', userRouter);
 app.use('/folders', isAuth, foldersRoute);
 
 app.use('/admin', isAuth, isAdmin, adminRoutes);
+
+app.use('/share', shareRoutes);
 
 app.use((err, req, res, next) => {
     console.log(err);

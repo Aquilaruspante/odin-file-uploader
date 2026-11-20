@@ -22,9 +22,11 @@ exports.folderShareGetLink = async function folderShareGetLink(req, res, next) {
     const { shareFolderId } = req.params;
 
     const folderShare = await db.folderShareGet(shareFolderId);
-    console.log(folderShare);
+    const hostname = req.hostname;
+    const protocol = req.protocol;
+    const port = process.env.PORT || 3000;
 
-    res.render('share-link', { folderShare });
+    res.render('share-link', { folderShare, hostname, protocol, port });
 };
 
 exports.shareFolderShow = async function shareFolderShow(req, res, next) {
@@ -32,7 +34,11 @@ exports.shareFolderShow = async function shareFolderShow(req, res, next) {
 
     const foldeShare = await db.folderShareGet(shareId);
 
-    const folder = await db.folderGetById(foldeShare.folderId);
+    if (foldeShare.expiresAt > Date.now()) {
+        const folder = await db.folderGetById(foldeShare.folderId);
 
-    res.render('folder', { folder });
+        res.render('folder', { folder });
+    } else {
+        next(new ExpressError(400, 'Expired link'));
+    };
 };

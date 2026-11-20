@@ -6,8 +6,6 @@ const cloudinary = require('../config/cloudinary');
 exports.folderGet = async function(req, res, next) {
     const { folderId } = req.params;
 
-    console.log(folderId, parseInt(folderId));
-
     if (isNaN(parseInt(folderId))) return next(new ExpressError(400, 'Bad request!'));
 
     try {
@@ -22,7 +20,7 @@ exports.folderGet = async function(req, res, next) {
             next(error);
         };
     } catch (err) {
-        console.log('this is an error', err);
+        console.log(err);
         next(new ExpressError());
     };
 };

@@ -47,10 +47,7 @@ exports.userDelete = async function userDelete(req, res, next) {
         });
     });
 
-    console.log('files: ', files, 'length: ', files.length);
-
     const results = await Promise.all(files.map(file => cloudinary.uploader.destroy(file.publicId, { resource_type: file.resource_type })));
-    console.log('results: ', results)
 
     results.forEach((result, index) => {
         if (result.result !== 'ok') {

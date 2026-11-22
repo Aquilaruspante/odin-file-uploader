@@ -13,7 +13,27 @@
             </form>
         </div>
     <% } %>
-    
+    <div id="folder-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            class="lucide lucide-square-chevron-down preview-icon">
+            <rect width="18" height="18" x="3" y="3" rx="2"/>
+            <path d="m16 10-4 4-4-4"/>
+        </svg>
+    </div>
+    <div id="folder-menu" class="invisible">
+        <a class="menu-link silkscreen-regular" href="/folders/<%= folder.id %>/share">Share folder</a>
+        <form action="/folders/<%= folder.id %>?_method=DELETE" method="POST" class="menu-form">
+            <button class="silkscreen-regular menu-link">Delete folder</button>
+        </form>
+    </div>
 </div>
 
 <% if (!folder.files.length) { %>
@@ -37,7 +57,7 @@
                 <p class="file-name"><%= file.name.length > 15 ? `${file.name.slice(0, 14)}(...).${file.name.split('.').findLast(e => (e)) }` : file.name %></p>
             </a>
         <% } %>
-        <a href="/folders/<%= folder.id %>/files/new" class="new-folder folder-component">
+        <a href="/folders/<%= folder.id %>/files/new" class="new-folder folder-component ml-20">
             <div class="folder-component new-folder">+</div>
         </a>
     </div>
@@ -46,4 +66,5 @@
     <a class="back-button" href="/">Back</a>
 </div>
 
+<script src="/folderMenu.js"></script>
 <%- include('./footer.ejs') %>

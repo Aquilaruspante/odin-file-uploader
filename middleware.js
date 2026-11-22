@@ -46,3 +46,17 @@ exports.isAdmin = async function isAdmin(req, res, next) {
 
     next(new ExpressError(404, 'Page not found'));
 };
+
+exports.folderShareConstraint = function folderShareConstraint(req, res, next) {
+    const { duration  } = req.params;
+    const { folderId } = req.params;
+    if (duration <= 0 || duration > 7) {
+        req.session.messages = { type: 'failure', message: 'Duration must be positive and less than 7' };
+        return req.session.save(err => {
+            if (err) return next(err);
+            res.redirect(`/folders/${folderId}/share`);
+        });
+    } else {
+        next();
+    };
+};

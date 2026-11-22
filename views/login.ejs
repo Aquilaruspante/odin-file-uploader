@@ -1,6 +1,6 @@
 <%- include('./header.ejs') %>
 
-<form action="/users/login" method="POST" class="silkscreen-regular">
+<form action="/users/login" method="POST" class="silkscreen-regular" autocomplete="off">
     <div class="form-element">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username">
@@ -14,3 +14,5 @@
     </div>
     <p class="sign-in-prompt">You dont have an account? <a href="/users/register">Sign up</a></p>
 </form>
+
+<%- include('./footer.ejs') %>

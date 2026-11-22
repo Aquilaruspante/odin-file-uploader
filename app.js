@@ -23,6 +23,7 @@ app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ static: true }));
+app.set('trust proxy', 1); // allows proxy to collect req.protocol
 
 app.use(methodOverride('_method'));
 
@@ -75,6 +76,12 @@ app.use('/folders', isAuth, foldersRoute);
 app.use('/admin', isAuth, isAdmin, adminRoutes);
 
 app.use('/share', shareRoutes);
+
+app.all('/{*splat}', (req, res) => {
+    const status = '404';
+    res.status(404).render('error', { status, message: 'Page not found!' });
+});
+
 
 app.use((err, req, res, next) => {
     console.log(err);

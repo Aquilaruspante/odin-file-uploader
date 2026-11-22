@@ -3,7 +3,7 @@ const folderControllers = require('../controllers/folderControllers');
 const shareController = require('../controllers/shareController');
 const { folderValidator } = require('../validator');
 const fileRouter = require('./fileRoute');
-const { isAuth, isFolderOwner } = require('../middleware');
+const { isAuth, isFolderOwner, folderShareConstraint } = require('../middleware');
 
 const router = new Router();
 
@@ -13,7 +13,7 @@ router.get('/new', folderControllers.folderCreateGet);
 
 router.get('/:folderId/share', isAuth, isFolderOwner, folderControllers.folderShare);
 
-router.post('/:folderId/share', isAuth, isFolderOwner, shareController.shareFolderCreate);
+router.post('/:folderId/share', isAuth, isFolderOwner, folderShareConstraint, shareController.shareFolderCreate);
 
 router.get('/:folderId/:shareFolderId', isAuth, isFolderOwner, shareController.folderShareGetLink);
 

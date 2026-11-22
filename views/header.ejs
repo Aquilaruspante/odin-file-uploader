@@ -10,18 +10,30 @@
     <title>File Uploader</title>
 </head>
 <body>
+    <div id="side-menu">
+        <nav class="silkscreen-regular side-menu">
+            <% if (locals.user) { %>
+                <a href="/users/logout">Logout</a>
+            <% } else { %>
+                <a href="/users/login">Login</a>
+                <a href="/users/register">Sign up</a>
+            <% } %>
+        </nav>
+    </div>
     <header>
         <div class="menu-container">
             <a href="/">
                 <h1 class="silkscreen-bold">File Uploader</h1>
             </a>
-            <nav class="silkscreen-bold">
+            <nav class="silkscreen-bold top-menu">
                 <% if (locals.user) { %>
                     <p class="username-display"><%= user.username[0] %></p>
+                    <p class="username-display-menu invisible"><%= user.username[0] %></p>
                     <a href="/users/logout">Logout</a>
                 <% } else { %>
                     <a href="/users/register">Sign Up</a>
                     <a href="/users/login">Login</a>
+                    <p class="username-display-menu">a</p>
                 <% } %>
             </nav>
         </div>

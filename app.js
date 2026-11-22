@@ -32,9 +32,10 @@ app.use(methodOverride('_method'));
 app.use(session({
     cookie: {
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
+        httpOnly: true,
+        secure: true
     },
-    secret: 'not a good secret',
+    secret: process.env.SESSION_SECRET || 'not a good secret',
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(

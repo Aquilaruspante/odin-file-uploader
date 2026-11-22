@@ -24,7 +24,7 @@ exports.folderShareGetLink = async function folderShareGetLink(req, res, next) {
     const folderShare = await db.folderShareGet(shareFolderId);
     const hostname = req.hostname;
     const protocol = req.protocol;
-    const port = process.env.PORT || 3000;
+    const port = process.env.NODE_ENV === 'production' ? '' : 3000;
 
     res.render('share-link', { folderShare, hostname, protocol, port });
 };
